@@ -1,4 +1,4 @@
-# terraform fmt -diff
+# terraform fmt -recursive
 
 terraform {
   required_providers {
@@ -35,22 +35,6 @@ locals {
 }
 
 module "backend" {
-  source = "./prod/backend"
+  source  = "./prod/backend"
   aws-env = data.aws_secretsmanager_secret_version.current.secret_id
 }
-
-/*
-data "aws_acm_certificate" "issued" {
-  domain      = "goormedu-clone.com"
-  statuses    = ["PENDING_VALIDATION"]
-  most_recent = true
-}
-
-resource "aws_acm_certificate_validation" "example" {
-  certificate_arn = data.aws_acm_certificate.issued.arn
-}
-
-output "name" {
-    value = aws_acm_certificate_validation.example
-}
-*/

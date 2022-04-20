@@ -4,18 +4,18 @@ resource "aws_security_group" "allow_alb" {
   vpc_id      = data.aws_vpc.vpc.id
 
   ingress {
-    description      = "ALB from VPC"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "ALB from VPC"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -44,11 +44,11 @@ resource "aws_lb_listener" "alb-listener" {
 }
 
 resource "aws_lb_target_group" "alb-target-group" {
-  name     = "alb-target-group"
-  port     = 80
-  protocol = "HTTP"
+  name        = "alb-target-group"
+  port        = 80
+  protocol    = "HTTP"
   target_type = "ip"
-  vpc_id   = data.aws_vpc.vpc.id
+  vpc_id      = data.aws_vpc.vpc.id
 }
 
 resource "aws_lb" "goormedu-clone-alb" {
