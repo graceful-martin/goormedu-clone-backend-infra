@@ -1,24 +1,13 @@
 resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
   bucket = aws_s3_bucket.bucket.id
-  policy = <<POLICY
-{
-    "Version": "2008-10-17",
-    "Id": "s3-put-delete-only",
-    "Statement": [
-        {
-            "Sid": "1",
-            "Effect": "Allow",
-            "Principal": "*",
-            "Action": [
-                "s3:PutObject",
-                "s3:DeleteObject",
-                "s3:GetObject"
-            ],
-            "Resource": "arn:aws:s3:::goormedu-clone-bucket/*"
-        }
-    ]
-}
-POLICY
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["*"] # ["PUT", "POST"]
+    allowed_origins = ["*"] # ["https://s3-website-test.hashicorp.com"]
+    expose_headers  = ["ETag"]
+    # max_age_seconds = 3000
+  }
 }
 
 resource "aws_s3_bucket_cors_configuration" "bucket-cors-configuration" {
