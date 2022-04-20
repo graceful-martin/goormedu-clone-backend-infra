@@ -36,7 +36,7 @@ resource "aws_ecs_service" "goormedu-clone-service" {
   force_new_deployment = true
   cluster              = aws_ecs_cluster.cluster.id
   task_definition      = aws_ecs_task_definition.goormedu-clone-task.arn
-  desired_count        = 0
+  desired_count        = 1
   # iam_role        = aws_iam_role.ecs-task-role.arn
   # depends_on      = [aws_iam_role_policy]
 
