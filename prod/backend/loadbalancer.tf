@@ -30,7 +30,7 @@ data "aws_subnets" "public-subnets" {
   }
 }
 
-resource "aws_lb_listener" "front_end" {
+resource "aws_lb_listener" "redirect-listener" {
   load_balancer_arn = aws_lb.goormedu-clone-alb.arn
   port              = "80"
   protocol          = "HTTP"
