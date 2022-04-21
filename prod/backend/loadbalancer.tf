@@ -5,8 +5,8 @@ resource "aws_security_group" "allow_alb" {
 
   ingress {
     description = "ALB from VPC"
-    from_port   = 80
-    to_port     = 80
+    from_port   = 443
+    to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -30,12 +30,33 @@ data "aws_subnets" "public-subnets" {
   }
 }
 
-resource "aws_lb_listener" "alb-listener" {
+resource "aws_lb_listener" "front_end" {
   load_balancer_arn = aws_lb.goormedu-clone-alb.arn
   port              = "80"
   protocol          = "HTTP"
-  # ssl_policy        = "ELBSecurityPolicy-2016-08"
-  # certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+
+  default_action {
+    type = "redirect"
+
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+data "aws_acm_certificate" "issued" {
+  domain   = "goormedu-clone.com"
+  statuses = ["ISSUED"]
+}
+
+resource "aws_lb_listener" "alb-listener" {
+  load_balancer_arn = aws_lb.goormedu-clone-alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = data.aws_acm_certificate.issued.arn
 
   default_action {
     type             = "forward"
@@ -45,8 +66,8 @@ resource "aws_lb_listener" "alb-listener" {
 
 resource "aws_lb_target_group" "alb-target-group" {
   name        = "alb-target-group"
-  port        = 80
-  protocol    = "HTTP"
+  port        = 443
+  protocol    = "HTTPS"
   target_type = "ip"
   vpc_id      = data.aws_vpc.vpc.id
 }
