@@ -56,7 +56,7 @@ resource "aws_security_group" "allow_ec2" {
 
 resource "aws_network_interface" "network_interface" {
   subnet_id       = data.aws_subnet.public-subnet.id
-  security_groups = [aws_security_group.allow_ssh.id]
+  security_groups = [aws_security_group.allow_ec2.id]
 }
 
 resource "aws_instance" "ec2" {
