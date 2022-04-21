@@ -1,7 +1,7 @@
 data "aws_subnets" "private-nat-subnets" {
   filter {
     name   = "tag:Name"
-    values = ["private-subnet-4", "private-subnet-5", "private-subnet-6"]
+    values = ["private-subnet-2", "private-subnet-4", "private-subnet-6"]
   }
 }
 

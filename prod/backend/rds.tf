@@ -33,7 +33,7 @@ resource "aws_security_group" "allow_db" {
 data "aws_subnets" "private-subnets" {
   filter {
     name   = "tag:Name"
-    values = ["private-subnet-1", "private-subnet-2", "private-subnet-3"]
+    values = ["private-subnet-1", "private-subnet-3", "private-subnet-5"]
   }
 }
 
