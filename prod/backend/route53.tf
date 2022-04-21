@@ -4,6 +4,7 @@ data "aws_route53_zone" "zone" {
 }
 
 resource "aws_route53_record" "www" {
+  allow_overwrite = true
   zone_id = data.aws_route53_zone.zone.zone_id
   name    = "api.goormedu-clone.com"
   type    = "A"
