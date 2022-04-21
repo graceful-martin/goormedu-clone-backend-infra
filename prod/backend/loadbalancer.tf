@@ -55,7 +55,7 @@ resource "aws_lb_listener" "redirect-listener" {
 }
 
 data "aws_acm_certificate" "issued" {
-  domain   = "goormedu-clone.com"
+  domain   = "api.goormedu-clone.com"
   statuses = ["ISSUED"]
 }
 
