@@ -9,5 +9,5 @@ resource "aws_route53_record" "www" {
   name    = "api.goormedu-clone.com"
   type    = "A"
   ttl     = "300"
-  records  = [aws_lb.goormedu-clone-alb.dns_name]
+  records  = ["dualstack.${aws_lb.goormedu-clone-alb.dns_name}"]
 }
