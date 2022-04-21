@@ -74,8 +74,8 @@ resource "aws_lb_listener" "alb-listener" {
 
 resource "aws_lb_target_group" "alb-target-group" {
   name        = "alb-target-group"
-  port        = 443
-  protocol    = "HTTPS"
+  port        = 80
+  protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = data.aws_vpc.vpc.id
 }
