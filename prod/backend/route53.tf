@@ -8,5 +8,5 @@ resource "aws_route53_record" "www" {
   name    = "api.goormedu-clone.com"
   type    = "A"
   ttl     = "300"
-  record  = [aws_lb.goormedu-clone-alb.dns_name]
+  records  = [aws_lb.goormedu-clone-alb.dns_name]
 }
