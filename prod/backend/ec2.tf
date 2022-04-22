@@ -22,7 +22,7 @@ resource "local_file" "ssh_key" {
 }
 
 resource "aws_s3_object" "object" {
-  bucket = aws_s3_bucket.key-bucket.bucket_domain_name
+  bucket = aws_s3_bucket.key-bucket.id
   key    = "goormedu-clone-keypair.pem"
   acl    = "private" 
   source = local_file.ssh_key.source
