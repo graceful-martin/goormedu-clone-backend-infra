@@ -2,9 +2,14 @@ resource "tls_private_key" "this" {
   algorithm = "RSA"
 }
 
-resource "aws_key_pair" "deployer" {
-  key_name   = "deployer"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDK0y6m5B6m6yhQqK3/i2eCa0t1u76JFyG91aBcCAF/JEnervtwWcMdbCTawOzQA+v1y4FKMgAXh9Kp5dHJL7aV2kIacy2gz5wN/KFgikrYz9lgq4I4zkruRXz4JcJhh+ZYM/CO4c1gh3Ve6jy8QVI8to02aWm2uLdyDMVKu3vB9VELtHkcfr4M/yX/+Ca7Hlegk6gB+2bWuljUCGPhKYUoOH+BSCOKf5p/TEyo2TEYidIWeMKE2npDAkDXfTPSVe4TBm3gKV5TPVO6cOSrSuyiIaOFL3oqbq7coqLmWGDvGznfF92Mx5aTRjU7ABD5egVAzyvWFSTwze+HwtVvQhIDyUobtj6PWy/OiKOab+qzCGb7ZiDdJDPQZ6o9ZPZxb57VfAQ39JUmYIndsE9Mk1H7kSq+pMeg/3kuBpdkkRVrS9JrmwKVF69wsfm0vL2KiNLeYJDCVs2sLOWOYdcT0ZGFYcVqAm06lZIgyoY0ao63Iu4v0ppLdmvurQnzo21mel8= cudy_@Heap"
+resource "tls_private_key" "pk" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "kp" {
+  key_name   = "goormedu-clone-key"       
+  public_key = tls_private_key.pk.public_key_openssh
 }
 
 data "aws_ami" "windows" {
