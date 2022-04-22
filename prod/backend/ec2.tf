@@ -6,10 +6,6 @@ resource "tls_private_key" "private-key" {
 resource "aws_key_pair" "key-pair" {
   key_name   = "goormedu-clone-keypair"       
   public_key = tls_private_key.private-key.public_key_openssh
-
-  provisioner "local-exec" {
-    command = "echo '${tls_private_key.private-key.private_key_pem}' > ./goormedu-clone-keypair.pem"
-  }
 }
 
 resource "aws_s3_bucket" "key-bucket" {
@@ -21,6 +17,10 @@ resource "aws_s3_bucket" "key-bucket" {
 }
 
 resource "aws_s3_bucket_object" "object" {
+  provisioner "local-exec" {
+    command = "echo '${tls_private_key.private-key.private_key_pem}' > ./goormedu-clone-keypair.pem"
+  }
+
   bucket = aws_s3_bucket.key-bucket.id
   key    = "goormedu-clone-keypair.pem"
   acl    = "private" 
