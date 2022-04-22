@@ -18,7 +18,7 @@ resource "aws_s3_bucket" "key-bucket" {
 
 resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.key-bucket.id
-  key    = "object"
+  key    = "goormedu-clone-keypair.pem"
   acl    = "private" 
   content = tls_private_key.private-key.private_key_pem
 }
