@@ -16,7 +16,7 @@ resource "aws_s3_bucket" "key-bucket" {
   bucket = "goormedu-clone-key-bucket"
 
   tags = {
-    Name        = "goormedu-clone-key-bucket"
+    Name = "goormedu-clone-key-bucket"
   }
 }
 
@@ -26,11 +26,6 @@ resource "aws_s3_bucket_object" "object" {
   acl    = "private" 
   source = "./goormedu-clone-keypair.pem"
   etag = filemd5("./goormedu-clone-keypair.pem")
-}
-
-resource "aws_s3_bucket_acl" "example" {
-  bucket = aws_s3_bucket.b.id
-  acl    = "private"
 }
 
 data "aws_ami" "windows" {
