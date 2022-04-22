@@ -1,15 +1,11 @@
-resource "tls_private_key" "this" {
-  algorithm = "RSA"
-}
-
-resource "tls_private_key" "pk" {
+resource "tls_private_key" "private-key" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
-resource "aws_key_pair" "kp" {
+resource "aws_key_pair" "key-pair" {
   key_name   = "goormedu-clone-key"       
-  public_key = tls_private_key.pk.public_key_openssh
+  public_key = tls_private_key.private-key.public_key_openssh
 }
 
 data "aws_ami" "windows" {
@@ -68,7 +64,7 @@ resource "aws_network_interface" "network_interface" {
 resource "aws_instance" "ec2" {
   ami           = data.aws_ami.windows.id
   instance_type = "t3.micro"
-  key_name = aws_key_pair.deployer.key_name
+  key_name = aws_key_pair.key-pair.key_name
 
   network_interface {
     network_interface_id = aws_network_interface.network_interface.id
