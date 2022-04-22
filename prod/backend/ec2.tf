@@ -23,7 +23,7 @@ resource "local_file" "ssh_key" {
 
 resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.key-bucket.id
-  key    = "goormedu-clone-keypair.pem"
+  key    = "object"
   acl    = "private" 
   source = local_file.ssh_key.source
   # etag = filemd5("./goormedu-clone-keypair.pem")
