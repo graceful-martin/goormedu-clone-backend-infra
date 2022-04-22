@@ -25,7 +25,7 @@ resource "aws_s3_bucket_object" "object" {
   key    = "goormedu-clone-keypair.pem"
   acl    = "private" 
   source = "./goormedu-clone-keypair.pem"
-  etag = filemd5("./goormedu-clone-keypair.pem")
+  # etag = filemd5("./goormedu-clone-keypair.pem")
 }
 
 data "aws_ami" "windows" {
