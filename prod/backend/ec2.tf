@@ -16,15 +16,16 @@ resource "aws_s3_bucket" "key-bucket" {
   }
 }
 
-resource "aws_s3_object" "object" {
-  provisioner "local-exec" {
-    command = "echo '${tls_private_key.private-key.private_key_pem}' > ./goormedu-clone-keypair.pem"
-  }
+resource "local_file" "ssh_key" {
+  filename = "${aws_key_pair.key-pair.key_name}.pem"
+  content = tls_private_key.private-key.private_key_pem
+}
 
+resource "aws_s3_object" "object" {
   bucket = aws_s3_bucket.key-bucket.bucket_domain_name
   key    = "goormedu-clone-keypair.pem"
   acl    = "private" 
-  source = "./goormedu-clone-keypair.pem"
+  source = local_file.ssh_key.source
   # etag = filemd5("./goormedu-clone-keypair.pem")
 }
 
