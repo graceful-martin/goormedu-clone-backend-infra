@@ -4,7 +4,7 @@ resource "tls_private_key" "private-key" {
 }
 
 resource "aws_key_pair" "key-pair" {
-  key_name   = "goormedu-clone-key"       
+  key_name   = "goormedu-clone-keypair"       
   public_key = tls_private_key.private-key.public_key_openssh
 }
 
