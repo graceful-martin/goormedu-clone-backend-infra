@@ -8,17 +8,21 @@ resource "aws_key_pair" "key-pair" {
   public_key = tls_private_key.private-key.public_key_openssh
 }
 
+resource "local_file" "ssh_key" {
+  filename = "${aws_key_pair.key-pair.key_name}.pem"
+  content = tls_private_key.private-key.private_key_pem
+
+  provisioner "local-exec" {
+    command = "echo ${self.content}"
+  }
+} 
+
 resource "aws_s3_bucket" "key-bucket" {
   bucket = "goormedu-clone-key-bucket"
 
   tags = {
     Name = "goormedu-clone-key-bucket"
   }
-}
-
-resource "local_file" "ssh_key" {
-  filename = "${aws_key_pair.key-pair.key_name}.pem"
-  content = tls_private_key.private-key.private_key_pem
 }
 
 resource "aws_s3_object" "object" {
