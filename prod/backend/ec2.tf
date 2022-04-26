@@ -1,3 +1,4 @@
+/*
 resource "tls_private_key" "private-key" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -94,3 +95,4 @@ resource "aws_instance" "ec2" {
     Name = "goormedu-clone-instance"
   }
 }
+*/
