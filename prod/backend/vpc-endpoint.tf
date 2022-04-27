@@ -35,4 +35,8 @@ resource "aws_vpc_endpoint" "vpc-endpoint" {
   subnet_ids = data.aws_subnets.private-nat-subnets.ids
 
   private_dns_enabled = true
+
+  tags = {
+    Name = "goormedu-clone-ssm-endpoint"
+  }
 }
