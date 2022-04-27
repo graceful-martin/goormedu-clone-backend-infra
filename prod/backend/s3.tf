@@ -45,11 +45,15 @@ resource "aws_s3_bucket" "main-bucket" {
 }
 */
 
+resource "aws_s3_bucket" "data-bucket" {
+  bucket = "goormedu-clone-data-bucket"
+}
+
 resource "aws_s3_bucket_policy" "allow_access_data_bucket" {
   bucket = aws_s3_bucket.data-bucket.id
   policy = <<POLICY
 {
-    "Version": "2008-10-17",
+    "Version": "2012-10-17",
     "Id": "s3-put-delete-only",
     "Statement": [
         {
@@ -86,8 +90,4 @@ resource "aws_s3_bucket_public_access_block" "data-bucket-public-access-block" {
   bucket              = aws_s3_bucket.data-bucket.id
   block_public_acls   = true
   block_public_policy = true
-}
-
-resource "aws_s3_bucket" "data-bucket" {
-  bucket = "goormedu-clone-data-bucket"
 }
