@@ -23,8 +23,8 @@ resource "aws_security_group" "allow_endpoint" {
   }
 }
 
-resource "aws_vpc_endpoint" "ec2" {
-  vpc_id            = aws_vpc.main.id
+resource "aws_vpc_endpoint" "vpc-endpoint" {
+  vpc_id            = data.aws_vpc.vpc.id
   service_name      = "com.amazonaws.ap-northeast-2.secretsmanager"
   vpc_endpoint_type = "Interface"
 
@@ -32,7 +32,7 @@ resource "aws_vpc_endpoint" "ec2" {
     aws_security_group.allow_endpoint.id,
   ]
 
-  subnet_ids = data.aws_subnets.private-nat-subnets.subnet_ids
+  subnet_ids = data.aws_subnets.private-nat-subnets.ids
 
   private_dns_enabled = true
 }
