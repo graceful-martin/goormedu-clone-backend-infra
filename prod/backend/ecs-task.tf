@@ -52,8 +52,12 @@ resource "aws_ecs_task_definition" "goormedu-clone-task" {
           "name": "AWS_REGION"
         },
         {
-          "valueFrom": "${var.aws-env}:AWS_S3::",
-          "name": "AWS_S3"
+          "valueFrom": "${var.aws-env}:AWS_S3_DATA_BUCKET::",
+          "name": "AWS_S3_DATA_BUCKET"
+        },
+        {
+          "valueFrom": "${var.aws-env}:AWS_S3_VIDEO_BUCKET::",
+          "name": "AWS_S3_VIDEO_BUCKET"
         },
         {
           "valueFrom": "${var.aws-env}:AWS_SECRET::",
