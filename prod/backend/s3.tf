@@ -68,6 +68,7 @@ resource "aws_s3_bucket_policy" "allow_access_data_bucket" {
 POLICY
 }
 
+/*
 resource "aws_s3_bucket_cors_configuration" "data-bucket-cors-configuration" {
   bucket = aws_s3_bucket.data-bucket.id
 
@@ -79,6 +80,7 @@ resource "aws_s3_bucket_cors_configuration" "data-bucket-cors-configuration" {
     max_age_seconds = 3000
   }
 }
+*/
 
 resource "aws_s3_bucket_public_access_block" "data-bucket-public-access-block" {
   bucket              = aws_s3_bucket.data-bucket.id
