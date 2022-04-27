@@ -61,7 +61,6 @@ resource "aws_s3_bucket_policy" "allow_access_data_bucket" {
             "Effect": "Allow",
             "Principal": "*",
             "Action": [
-                "s3:PutObject",
                 "s3:DeleteObject",
                 "s3:GetObject"
             ],
