@@ -61,8 +61,7 @@ resource "aws_s3_bucket_policy" "allow_access_data_bucket" {
             "Effect": "Allow",
             "Principal": "*",
             "Action": [
-                "s3:DeleteObject",
-                "s3:GetObject"
+                "s3:*"
             ],
             "Resource": "arn:aws:s3:::goormedu-clone-data-bucket/*"
         }
