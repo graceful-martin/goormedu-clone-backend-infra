@@ -1,4 +1,3 @@
-/*
 resource "tls_private_key" "private-key" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -24,20 +23,15 @@ resource "aws_s3_object" "object" {
   content = tls_private_key.private-key.private_key_pem
 }
 
-data "aws_ami" "windows" {
+data "aws_ami" "amazon-2" {
   most_recent = true
 
   filter {
-    name   = "name"
-    values = ["Windows_Server-2019-English-Full-Base-*"]  
+    name = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
   }
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["801119661308"] # Canonical
+  owners = ["amazon"]
 }
 
 data "aws_subnet" "public-subnet" {
@@ -54,8 +48,8 @@ resource "aws_security_group" "allow_ec2" {
 
   ingress {
     description = "SSH from VPC"
-    from_port   = 3389
-    to_port     = 3389
+    from_port   = 22
+    to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -78,7 +72,7 @@ resource "aws_network_interface" "network_interface" {
 }
 
 resource "aws_instance" "ec2" {
-  ami           = data.aws_ami.windows.id
+  ami           = data.aws_ami.amazon-2.id
   instance_type = "t3.micro"
   key_name = aws_key_pair.key-pair.key_name
 
@@ -95,4 +89,3 @@ resource "aws_instance" "ec2" {
     Name = "goormedu-clone-instance"
   }
 }
-*/
