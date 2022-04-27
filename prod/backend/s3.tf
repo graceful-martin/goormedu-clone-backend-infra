@@ -1,3 +1,4 @@
+/*
 resource "aws_s3_bucket_policy" "allow_access_main_bucket" {
   bucket = aws_s3_bucket.main-bucket.id
   policy = <<POLICY
@@ -42,6 +43,7 @@ resource "aws_s3_bucket_public_access_block" "main-bucket-public-access-block" {
 resource "aws_s3_bucket" "main-bucket" {
   bucket = "goormedu-clone-bucket"
 }
+*/
 
 resource "aws_s3_bucket_policy" "allow_access_data_bucket" {
   bucket = aws_s3_bucket.data-bucket.id
