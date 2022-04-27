@@ -53,7 +53,7 @@ resource "aws_s3_bucket_policy" "allow_access_data_bucket" {
   bucket = aws_s3_bucket.data-bucket.id
   policy = <<POLICY
 {
-    "Version": "2012-10-17",
+    "Version": "2008-10-17",
     "Id": "s3-put-delete-only",
     "Statement": [
         {
