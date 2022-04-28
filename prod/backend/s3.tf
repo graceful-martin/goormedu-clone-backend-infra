@@ -14,7 +14,7 @@ resource "aws_s3_bucket_policy" "allow_access_from_another_account" {
                 "s3:DeleteObject",
                 "s3:GetObject"
             ],
-            "Resource": "arn:aws:s3:::goormedu-clone-bucket/*"
+            "Resource": "arn:aws:s3:::goormedu-clone-data-bucket/*"
         }
     ]
 }
@@ -40,5 +40,5 @@ resource "aws_s3_bucket_public_access_block" "bucket-public-access-block" {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "goormedu-clone-bucket"
+  bucket = "goormedu-clone-data-bucket"
 }
